@@ -87,26 +87,26 @@ WSGI_APPLICATION = 'lanfia.wsgi.application'
 #     }
 # }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'd99r8kblk2p53o', 
-#         'USER': 'larezxzwpnjcyr', 
-#         'PASSWORD': 'fe5a92d60aa7ce42eb0cb76bb026d5fc6b7963a2cda38aed06117e3c15f34f0e',
-#         'HOST': 'ec2-54-208-104-27.compute-1.amazonaws.com', 
-#         'PORT': '5432',
-#     }
-# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'lanfiaApi', 
-        'USER': 'postgres', 
-        'PASSWORD': 'issa01',
-        'HOST': '127.0.0.1', 
+        'NAME': 'd4ieccm9bdsj05', 
+        'USER': 'mmbvxwrwimuzkk', 
+        'PASSWORD': '3f8d8bcdc7d274e4c58d89e03b1284a4d4f94435d10e63de12cb98702d0dbd75',
+        'HOST': 'ec2-54-85-56-210.compute-1.amazonaws.com', 
         'PORT': '5432',
     }
-}   
+}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'lanfiaApi', 
+#         'USER': 'postgres', 
+#         'PASSWORD': 'issa01',
+#         'HOST': '127.0.0.1', 
+#         'PORT': '5432',
+#     }
+# }   
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
