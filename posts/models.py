@@ -87,8 +87,31 @@ class Chef_menage(Personne):
     annee_deplace=models.DateField(blank=False)
     lieu_residence_a=models.CharField(max_length=100,blank=False)
     intention_ret=models.BooleanField()
+    vulnerablePhy=models.BooleanField(default=False)
+    vulnerableCondi=models.BooleanField(default=False)
+    vulnerableEtude=models.BooleanField(default=False)
+    vulnerableOccup=models.BooleanField(default=False)
     def __str__(self):
         return '{}_{}'.format(self.nom,self.prenom)
+
+class Recenser(models.Model):
+    parent=models.ForeignKey(Chef_menage,on_delete=models.CASCADE)
+    owner3 = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='list_recenser', on_delete=models.CASCADE,null=True)
+    list_handicap=(('S','Sans_Handicap'),('Nv','Non_voyant'),('So','Sourd'),('Mu','Muet'),('Be','Begue'),('Al','Albinos'),('Hms','Handicap_membre_superieurs'),('Hmi','Handicap_membre_inferieurs'),('Hp','Handicap_physiques'),('Au','Autre_handicap'))
+    handicap=models.CharField(max_length=100,blank=False,choices=list_handicap)
+    maladie=models.CharField(max_length=100,blank=False)
+    list1=(('Vm','Vie_Ménage'),('Hm','Hors_Ménage'),('D','Décédé'),('N','RAS'))
+    survie_de_mere=models.BooleanField(default=True)
+    survie_de_pere=models.BooleanField(default=True )
+    niveau_instruction=models.CharField(max_length=100,blank=False)
+    occupation_actuelle=models.CharField(max_length=100,blank=False)
+    situation_matrimoniale=models.CharField(max_length=100,blank=False)
+    list_religion=(('C','Catholique'),('M','Méthodique'),('E','Evangélique'),('Ce','Céleste'),('H','Harriste'),('Au','AutreRC'),('Mu','Mulsuman'),('An','Animiste'),('Au','AutreR'),('S','Sans_Religion'))
+    religion=models.CharField(max_length=100,blank=False,choices=list_religion)
+    class Meta:
+        ordering=['parent']
+    def __str__(self):
+        return '{}'.format(self.parent)
         
 class Conjoint(models.Model):
     niveau_etude=models.CharField(max_length=100,blank=True,default='master')
@@ -97,28 +120,11 @@ class Conjoint(models.Model):
     idc=models.ForeignKey(Chef_menage,on_delete=models.CASCADE)
     sexe=(('M','Maxculin'),('F','Feminin'))
     sexes=models.CharField(max_length=1,choices=sexe)
+    list_handicap=(('S','Sans_Handicap'),('Nv','Non_voyant'),('So','Sourd'),('Mu','Muet'),('Be','Begue'),('Al','Albinos'),('Hms','Handicap_membre_superieurs'),('Hmi','Handicap_membre_inferieurs'),('Hp','Handicap_physiques'),('Au','Autre_handicap'))
+    handicap=models.CharField(max_length=100,blank=False,choices=list_handicap)
     owner2 = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='list_conjoint', on_delete=models.CASCADE,null=True)
     def __str__(self):
         return '{}_{}'.format(self.nom,self.prenom)
-        
-class Recenser(models.Model):
-    parent=models.ForeignKey(Chef_menage,on_delete=models.CASCADE)
-    owner3 = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='list_recenser', on_delete=models.CASCADE,null=True)
-    list_religion=(('C','Catholique'),('M','Méthodique'),('E','Evangélique'),('Ce','Céleste'),('H','Harriste'),('Au','AutreRC'),('Mu','Mulsuman'),('An','Animiste'),('Au','AutreR'),('S','Sans_Religion'))
-    religion=models.CharField(max_length=100,blank=False,choices=list_religion)
-    list_handicap=(('S','Sans_Handicap'),('Nv','Non_voyant'),('So','Sourd'),('Mu','Muet'),('Be','Begue'),('Al','Albinos'),('Hms','Handicap_membre_superieurs'),('Hmi','Handicap_membre_inferieurs'),('Hp','Handicap_physiques'),('Au','Autre_handicap'))
-    handicap=models.CharField(max_length=100,blank=False,choices=list_handicap)
-    maladie=models.CharField(max_length=100,blank=False,choices=list_handicap)
-    list1=(('Vm','Vie_Ménage'),('Hm','Hors_Ménage'),('D','Décédé'),('N','RAS'))
-    survie_de_mere=models.BooleanField(default=True)
-    survie_de_pere=models.BooleanField(default=True )
-    niveau_instruction=models.CharField(max_length=100,blank=False)
-    occupation_actuelle=models.CharField(max_length=100,blank=False)
-    situation_matrimoniale=models.CharField(max_length=100,blank=False)
-    class Meta:
-        ordering=['parent']
-    def __str__(self):
-        return '{}'.format(self.parent)
 
 class Enfant(models.Model):
     parentf=models.ForeignKey(Chef_menage,on_delete=models.CASCADE)
@@ -127,6 +133,8 @@ class Enfant(models.Model):
     niveau_etude=models.CharField(max_length=100,blank=True,default='master')
     sexe=(('M','Maxculin'),('F','Feminin'))
     sexes=models.CharField(max_length=1,choices=sexe)
+    list_handicap=(('S','Sans_Handicap'),('Nv','Non_voyant'),('So','Sourd'),('Mu','Muet'),('Be','Begue'),('Al','Albinos'),('Hms','Handicap_membre_superieurs'),('Hmi','Handicap_membre_inferieurs'),('Hp','Handicap_physiques'),('Au','Autre_handicap'))
+    handicap=models.CharField(max_length=100,blank=False,choices=list_handicap)
     def __str__(self):
         return '{}_{}'.format(self.nom,self.prenom)
         
@@ -135,6 +143,7 @@ class Commodite(models.Model):
     owner5 = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='list_commodite', on_delete=models.CASCADE,null=True)
     nombre_piece=models.IntegerField(default=1)
     nombre_piece_dormir=models.IntegerField(default=1)
+    typelogement=models.CharField(max_length=100,blank=False)
     nature_mur=models.CharField(max_length=100,blank=False)
     nature_toit=models.CharField(max_length=100,blank=False)
     nature_sol=models.CharField(max_length=100,blank=False)
@@ -179,6 +188,9 @@ class Charge(models.Model):
     occupation=models.CharField(max_length=100,blank=True,default='Informaticien')
     immigre=models.BooleanField(default=False)
     intention_ret=models.BooleanField()
+    list_handicap=(('S','Sans_Handicap'),('Nv','Non_voyant'),('So','Sourd'),('Mu','Muet'),('Be','Begue'),('Al','Albinos'),('Hms','Handicap_membre_superieurs'),('Hmi','Handicap_membre_inferieurs'),('Hp','Handicap_physiques'),('Au','Autre_handicap'))
+    handicap=models.CharField(max_length=100,blank=False,choices=list_handicap)
+    
     def __str__(self):
         return '{}_{}'.format(self.nom,self.prenom)
 

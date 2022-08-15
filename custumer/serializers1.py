@@ -1,5 +1,12 @@
 from rest_framework import serializers
 from posts.models import *
+from .models import*
+
+class AffectaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Affectation
+        fields = '__all__'
+
 
 class PostChefMSerializer(serializers.HyperlinkedModelSerializer):
     owner1 = serializers.ReadOnlyField(source='owner1.user_name')

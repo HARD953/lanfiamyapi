@@ -229,17 +229,28 @@ class ListRecenser(generics.ListAPIView):
         user = self.request.user
         return Chef_menage.objects.filter(owner=user)
 
+
+
+
 class RecensementView(APIView):
     permission_classes=[IsAgentAuthenticated]
     analyse={}
     def post(self,request):
-        data = JSONParser().parse(request)
+        data=request.data
+        if self.request.user.is_authenticated:
+            data['donateur']=self.request.user.user_name
+            serializer = PostChefMSerializer(data=data)
+        else:
+            data['donateur']='issa'
+            serializer = PostChefMSerializer(data=data)
+        error_message=None
+        message='Merci pour votre contribution:\n nous vous contacterons dans peu'
+
         if data['Chef_menage']:
             for chef_menage in data['chef_menage']:
-                serializerch = PostChefMSerializer(data=chef_menage)
-                if serializerch.is_valid():
-                    serializerch.save()
-                    analyse['capital_humain']=[chef_menage['sexes'],chef_menage['annee_naissance']]
+                serializerche = PostChefMSerializer(data=chef_menage)
+                if serializerche.is_valid():
+                    serializerche.save()
         if data['Conjoint']:
             for conjoint in data['Conjoint']:
                 serializerco = PostConjointSerializer(data=conjoint)
@@ -258,9 +269,9 @@ class RecensementView(APIView):
 
         if data['Charge']:
             for charge in data['Charge']:
-                serializere=PostChargeSerializer(data=charge)
-                if serializerg.is_valid():
-                    serializerg.save()
+                serializerch=PostChargeSerializer(data=charge)
+                if serializerch.is_valid():
+                    serializerch.save()
 
         if data['Commodite']:
             for commodite in data['Commodite']:
@@ -277,8 +288,8 @@ class RecensementView(APIView):
                 serializerd=DeceS(data=deces)
                 if serializerd.is_valid():
                     serializerd.save()
-            return JsonResponse(serializerp.data, status=201)
-        return JsonResponse(serializer.errors, status=400)
+            return JsonResponse(serializerd.data, status=201)
+        return JsonResponse(serializerd.errors, status=400)
 
 
     # def get(self,request,pk):

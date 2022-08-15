@@ -20,7 +20,7 @@ class WritePermission(BasePermission):
         return obj.id==request.user
 
 class ChefMenageList(generics.ListAPIView):
-    permission_classes=[IsSuperAdminAuthenticated]
+    permission_classes=[AllowAny]
     model=Chef_menage
     serializer_class=PostChefMSerializer
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -31,7 +31,7 @@ class ChefMenageList(generics.ListAPIView):
         return Chef_menage.objects.all()
 
 class ChefMenageListd(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes=[IsSuperAdminAuthenticated]
+    permission_classes=[AllowAny]
     model=Chef_menage
     serializer_class=PostChefMSerializer
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -42,7 +42,7 @@ class ChefMenageListd(generics.RetrieveUpdateDestroyAPIView):
 
 #Les Conjoint
 class ConjointList(generics.ListAPIView):
-    permission_classes=[IsSuperAdminAuthenticated]
+    permission_classes=[AllowAny]
     model=Conjoint
     serializer_class=PostConjointSerializer
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -52,7 +52,7 @@ class ConjointList(generics.ListAPIView):
         return Conjoint.objects.all()
 
 class ConjointListd(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes=[IsSuperAdminAuthenticated]
+    permission_classes=[AllowAny]
     model=Conjoint
     serializer_class=PostConjointSerializer
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -61,10 +61,9 @@ class ConjointListd(generics.RetrieveUpdateDestroyAPIView):
         user = self.request.user
         return Conjoint.objects.all()
 
-
 #Les Recensés
 class RecenserListd(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes=[IsSuperAdminAuthenticated]
+    permission_classes=[AllowAny]
     model=Recenser
     serializer_class=RecensementS
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -74,7 +73,7 @@ class RecenserListd(generics.RetrieveUpdateDestroyAPIView):
         return Recenser.objects.all()
 
 class RecenserList(generics.ListAPIView):
-    permission_classes=[IsSuperAdminAuthenticated]
+    permission_classes=[AllowAny]
     model=Recenser
     serializer_class=RecensementS
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -85,7 +84,7 @@ class RecenserList(generics.ListAPIView):
     
 #Les Enfants
 class EnfantListd(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes=[IsSuperAdminAuthenticated]
+    permission_classes=[AllowAny]
     model=Enfant
     serializer_class=EnfantS
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -95,7 +94,7 @@ class EnfantListd(generics.RetrieveUpdateDestroyAPIView):
         return Enfant.objects.all()
 
 class EnfantList(generics.ListAPIView):
-    permission_classes=[IsSuperAdminAuthenticated]
+    permission_classes=[AllowAny]
     model=Enfant
     serializer_class=EnfantS
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -106,7 +105,7 @@ class EnfantList(generics.ListAPIView):
 
 #Les commodites
 class CommoditeListd(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes=[IsSuperAdminAuthenticated]
+    permission_classes=[AllowAny]
     model=Commodite
     serializer_class=CommoditeS
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -116,7 +115,7 @@ class CommoditeListd(generics.RetrieveUpdateDestroyAPIView):
         return Commodite.objects.all()
 
 class CommoditeList(generics.ListAPIView):
-    permission_classes=[IsSuperAdminAuthenticated]
+    permission_classes=[AllowAny]
     model=Commodite
     serializer_class=CommoditeS
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -127,7 +126,7 @@ class CommoditeList(generics.ListAPIView):
 
 #Les equipements
 class EquipementListd(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes=[IsSuperAdminAuthenticated]
+    permission_classes=[AllowAny]
     model=Equipement
     serializer_class=EquipementS
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -138,7 +137,7 @@ class EquipementListd(generics.RetrieveUpdateDestroyAPIView):
 
 
 class EquipementList(generics.ListAPIView):
-    permission_classes=[IsSuperAdminAuthenticated]
+    permission_classes=[AllowAny]
     model=Equipement
     serializer_class=EquipementS
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -149,7 +148,7 @@ class EquipementList(generics.ListAPIView):
 
 #Les deces
 class DecesList(generics.ListAPIView):
-    permission_classes=[IsSuperAdminAuthenticated]
+    permission_classes=[AllowAny]
     model=Deces
     serializer_class=DeceS
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -159,7 +158,7 @@ class DecesList(generics.ListAPIView):
         return Deces.objects.all()
 
 class DecesListd(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes=[IsSuperAdminAuthenticated]
+    permission_classes=[AllowAny]
     model=Deces
     serializer_class=DeceS
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -170,7 +169,7 @@ class DecesListd(generics.RetrieveUpdateDestroyAPIView):
 
 #les charges
 class ChargeList(generics.ListAPIView):
-    permission_classes=[IsSuperAdminAuthenticated]
+    permission_classes=[AllowAny]
     model=Charge
     serializer_class=PostChargeSerializer
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -180,7 +179,7 @@ class ChargeList(generics.ListAPIView):
         return Charge.objects.all()
 
 class ChargeListd(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes=[IsSuperAdminAuthenticated]
+    permission_classes=[AllowAny]
     model=Charge
     serializer_class=PostChargeSerializer
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -188,7 +187,7 @@ class ChargeListd(generics.RetrieveUpdateDestroyAPIView):
     def get_queryset(self):
         user = self.request.user
         return Charge.objects.all()
-
+        
     # def get(self,request,pk):
     #     try:
     #         affectations = Affecter.objects.get(pk=pk)

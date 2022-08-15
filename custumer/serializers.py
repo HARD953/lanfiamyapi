@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .models import *
 from django.contrib.auth.models import User
 
+
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     list_chef_menage = serializers.HyperlinkedRelatedField(many=True, view_name='chef_menage-detail',read_only=True)
     list_equipement = serializers.HyperlinkedRelatedField(many=True, view_name='equipement-detail',read_only=True)
@@ -14,7 +15,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.user_name')
     class Meta:
         model = NewUser
-        fields=['user_name','email','first_name','password','adresse','about_me','owner','is_agent','is_active','is_staff','list_chef_menage','list_equipement','list_commodite','list_enfant','list_deces','list_charge','list_conjoint','list_recenser','district','region','departement','sous_prefecture','commune','milieu_r','quartier']
+        fields=['user_name','email','first_name','password','adresse','about_me','owner','is_agent','is_active','is_staff','list_chef_menage','list_equipement','list_commodite','list_enfant','list_deces','list_charge','list_conjoint','list_recenser','district','region','departement','sous_prefecture','commune']
         extra_kwargs ={
             'password':{'write_only':True}
         }

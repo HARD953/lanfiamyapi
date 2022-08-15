@@ -2,8 +2,15 @@ from django.urls import path,include
 from .views import*
 from rest_framework.urlpatterns import format_suffix_patterns
 from .analyse import*
+from .dat import *
+from .vulnerablecond import*
+from .vulnerablephy import*
+from .vulnerableetude import*
+from .vulnerableoccu import*
+from .generale import*
 
-urlpatterns=format_suffix_patterns([
+
+urlpatterns=[
     path('chefmenage/', ChefMenageList.as_view(),name='chef_menage-list'),
     path('dchefmenage/<int:pk>/', ChefMenageDetail.as_view(),name='chef_menage-detail'),
     path('conjoint/', ConjointList.as_view(),name='conjoint'),
@@ -21,5 +28,13 @@ urlpatterns=format_suffix_patterns([
     path('charge/', ChargeList.as_view(),name='charge'),
     path('dcharge/<int:pk>/', ChargeDetail.as_view(),name='charge-detail'),
     path('recenser/', RecensementView.as_view(),name='charge'),
-    path('analyses/',Information)
-])
+    #Information traiter
+    path('analyses2/',Information),
+    path('analyses/',Information2),
+    #Information simple
+    path('vulnerablephys/',vulnerablep),
+    path('vulnerablecon/',vulnerablec),
+    path('vulnerableetud/',vulnerableet),
+    path('vulnerableoccup/',vulnerableoc),
+    path('vulnerablegs/',vulnerableg),
+]

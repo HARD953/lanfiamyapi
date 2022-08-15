@@ -1,3 +1,4 @@
+from venv import create
 from django.db import models
 from django.contrib.auth.models import AbstractUser,PermissionsMixin, AbstractBaseUser,BaseUserManager
 
@@ -61,16 +62,23 @@ class NewUser(AbstractBaseUser,PermissionsMixin):
     departement=models.CharField(max_length=100,blank=False)
     sous_prefecture=models.CharField(max_length=100,blank=False)
     commune=models.CharField(max_length=100,blank=False)
-    milieu_r=models.CharField(max_length=100,blank=False,default='urbain')
-    quartier=models.CharField(max_length=100,blank=False,default='Rue_12_Avenue_11')
 
-    x=['district','region','departement','sous_prefecture','commune','milieu_r','quartier']
+    x=['district','region','departement','sous_prefecture','commune']
 
     objects=CustumerAccountManager()
 
     USERNAME_FIELD='email'
-    REQUIRED_FIELDS=['user_name','first_name','adresse','about_me','is_active','is_staff','is_superuser','is_user','is_agent','district','region','departement','sous_prefecture','commune','milieu_r','quartier']
+    REQUIRED_FIELDS=['user_name','first_name','adresse','about_me','is_active','is_staff','is_superuser','is_user','is_agent','district','region','departement','sous_prefecture','commune']
     
+    def __str__(self):
+        return self.user_name
+
+
+class Affectation(models.Model):
+    agent=models.ForeignKey(NewUser,on_delete=models.CASCADE)
+    commune=models.CharField(max_length=100,blank=False)
+    quartier=models.CharField(max_length=100,blank=False,default='Rue_12_Avenue_11')
+    create=models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return self.user_name
 

@@ -21,9 +21,19 @@ from rest_framework import status
 from django.http import Http404
 from datetime import date
 
-
-
-def Information(request):
+def vulnerableg(request):
+    # queryset=Chef_menage.objects.all()
+    # permission_classes=[AllowAny]
+    # serializer_class=PostChefMSerializer
+    # filter_backends = [DjangoFilterBackend,SearchFilter]
+    # search_fields=["organisations","user_name"]
+    # filterset_fields=["organisations","user_name"]
+    # def list(self, request):
+    #     # Note the use of `get_queryset()` instead of `self.queryset`
+    #     queryset = self.get_queryset()
+    #     pagine=self.paginate_queryset(queryset)
+    #     serializer = PostChefMSerializer(queryset, many=True)
+    #     return Response({'status':status.HTTP_200_OK,'data':serializer.data})
     if request.method=="GET":
         chef=Chef_menage.objects.all()
         chefs=PostChefMSerializer(chef,context={'request': request},many=True)
@@ -32,6 +42,7 @@ def Information(request):
         data1={}
         for i in idf:
             data={}
+            data['chefmenage']=[dict(s) for s in PostChefMSerializer(Chef_menage.objects.filter(id=i),context={'request': request},many=True).data]
             data['enfant']=[dict(s) for s in EnfantS(Enfant.objects.filter(parentf=i),context={'request': request},many=True).data]
             data['charge']=[dict(s) for s in PostChargeSerializer(Charge.objects.filter(parentg=i),context={'request': request},many=True).data]
             data['conjoint']=[dict(s) for s in PostConjointSerializer(Conjoint.objects.filter(idc=i),context={'request': request},many=True).data]
@@ -41,8 +52,8 @@ def Information(request):
             data['deces']=[dict(s) for s in DeceS(Deces.objects.filter(parentd=i),context={'request': request},many=True).data]
             data1["{}".format(i)]=data
         return JsonResponse({"data":data1, "status":status.HTTP_200_OK,"message":"liste des récensers"})
-x="youtube.com/watch?v=Q4ua3E3vH58"
+
 
 
     
-    
+ 

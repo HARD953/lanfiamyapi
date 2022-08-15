@@ -11,7 +11,7 @@ class PostConjointSerializer(serializers.HyperlinkedModelSerializer):
     owner2 = serializers.ReadOnlyField(source='owner2.user_name')
     class Meta:
         model = Conjoint
-        fields=['owner2','id','url','annee_naissance','sexes','niveau_etude','occupation','idc']
+        fields=['owner2','id','url','annee_naissance','sexes','niveau_etude','occupation','handicap','idc']
 class RecensementS(serializers.HyperlinkedModelSerializer):
     owner3 = serializers.ReadOnlyField(source='owner3.user_name')
     class Meta:
@@ -22,14 +22,13 @@ class EnfantS(serializers.HyperlinkedModelSerializer):
     owner4 = serializers.ReadOnlyField(source='owner4.user_name')
     class Meta:
         model = Enfant
-        fields=['owner4','id','url','annee_naissance','sexes','parentf','niveau_etude']
+        fields=['owner4','id','url','annee_naissance','sexes','parentf','niveau_etude','handicap']
 
 class CommoditeS(serializers.HyperlinkedModelSerializer):
     owner5 = serializers.ReadOnlyField(source='owner5.user_name')
     class Meta:
         model = Commodite
-        fields =['owner5','id','url','loyer','evacuation_eau','evacuation_ordure','cuisson','eclairage','parentc','nombre_piece','nombre_piece_dormir','nature_mur','nature_toit','lieu_aisance','nature_sol','alimentation_eau']
-
+        fields =['owner5','id','url','loyer','evacuation_eau','evacuation_ordure','cuisson','eclairage','parentc','nombre_piece','nombre_piece_dormir','typelogement','nature_mur','nature_toit','lieu_aisance','nature_sol','alimentation_eau']
 
 class EquipementS(serializers.HyperlinkedModelSerializer):
     owner6 = serializers.ReadOnlyField(source='owner6.user_name')
@@ -47,4 +46,4 @@ class PostChargeSerializer(serializers.HyperlinkedModelSerializer):
     owner8 = serializers.ReadOnlyField(source='owner8.user_name')
     class Meta:
         model = Charge
-        fields=['owner8','id','url','annee_naissance','immigre','intention_ret','parentg','sexesd','niveau_etude','occupation']
+        fields=['owner8','id','url','annee_naissance','immigre','intention_ret','parentg','sexesd','niveau_etude','occupation','handicap']

@@ -23,15 +23,16 @@ from datetime import date
 
 
 
-def Information(request):
+def vulnerablep(request):
     if request.method=="GET":
-        chef=Chef_menage.objects.all()
+        chef=Chef_menage.objects.filter(vulnerablePhy=True)
         chefs=PostChefMSerializer(chef,context={'request': request},many=True)
         dataf=[dict(i) for i in chefs.data]
         idf=[i['id'] for i in dataf]
         data1={}
         for i in idf:
             data={}
+            data['chefmenage']=[dict(s) for s in PostChefMSerializer(Chef_menage.objects.filter(id=i),context={'request': request},many=True).data]
             data['enfant']=[dict(s) for s in EnfantS(Enfant.objects.filter(parentf=i),context={'request': request},many=True).data]
             data['charge']=[dict(s) for s in PostChargeSerializer(Charge.objects.filter(parentg=i),context={'request': request},many=True).data]
             data['conjoint']=[dict(s) for s in PostConjointSerializer(Conjoint.objects.filter(idc=i),context={'request': request},many=True).data]
@@ -41,7 +42,9 @@ def Information(request):
             data['deces']=[dict(s) for s in DeceS(Deces.objects.filter(parentd=i),context={'request': request},many=True).data]
             data1["{}".format(i)]=data
         return JsonResponse({"data":data1, "status":status.HTTP_200_OK,"message":"liste des récensers"})
-x="youtube.com/watch?v=Q4ua3E3vH58"
+    else:
+        return Response({'message':'Personne'})
+
 
 
     

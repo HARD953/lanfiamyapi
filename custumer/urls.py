@@ -13,6 +13,8 @@ urlpatterns=format_suffix_patterns([
     path('superadmin/', CreateSuperAdmin.as_view(),name='registers-sadmin'),
     path('admins/', CreateAdmin.as_view(),name='registers-admin'),
     path('agent/', CreateAgent.as_view(),name='registers-agent'),
+    path('effecter/', Affecter.as_view(),name='affecter-agent'),
+
 
     path('aladmin/', ListAdmin.as_view(),name='registers-sadmin-detail'),
     path('alagent/', ListAgent.as_view(),name='registers-admin-detail'),

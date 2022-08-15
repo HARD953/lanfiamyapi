@@ -20,7 +20,7 @@ class WritePermission(BasePermission):
         return obj.id==request.user
 
 class ChefMenageLista(generics.ListAPIView):
-    permission_classes=[IsAdminAuthenticated]
+    permission_classes=[AllowAny]
     model=Chef_menage
     serializer_class=PostChefMSerializer
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -30,7 +30,7 @@ class ChefMenageLista(generics.ListAPIView):
         return Chef_menage.objects.filter(commune=user.commune)
 
 class ChefMenageListad(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes=[IsAdminAuthenticated]
+    permission_classes=[AllowAny]
     model=Chef_menage
     serializer_class=PostChefMSerializer
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -41,7 +41,7 @@ class ChefMenageListad(generics.RetrieveUpdateDestroyAPIView):
 
 #Les Conjoint
 class ConjointLista(generics.ListAPIView):
-    permission_classes=[IsAdminAuthenticated]
+    permission_classes=[AllowAny]
     model=Conjoint
     serializer_class=PostConjointSerializer
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -51,7 +51,7 @@ class ConjointLista(generics.ListAPIView):
         return Conjoint.objects.filter(commune=user.commune)
 
 class ConjointListad(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes=[IsAdminAuthenticated]
+    permission_classes=[AllowAny]
     model=Conjoint
     serializer_class=PostConjointSerializer
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -62,7 +62,7 @@ class ConjointListad(generics.RetrieveUpdateDestroyAPIView):
 
 #Les Recensés
 class RecenserListad(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes=[IsAdminAuthenticated]
+    permission_classes=[AllowAny]
     model=Recenser
     serializer_class=RecensementS
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -72,7 +72,7 @@ class RecenserListad(generics.RetrieveUpdateDestroyAPIView):
         return Recenser.objects.all()
 
 class RecenserLista(generics.ListAPIView):
-    permission_classes=[IsAdminAuthenticated]
+    permission_classes=[AllowAny]
     model=Recenser
     serializer_class=RecensementS
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -83,7 +83,7 @@ class RecenserLista(generics.ListAPIView):
     
 #Les Enfants
 class EnfantListad(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes=[IsAdminAuthenticated]
+    permission_classes=[AllowAny]
     model=Enfant
     serializer_class=EnfantS
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -93,7 +93,7 @@ class EnfantListad(generics.RetrieveUpdateDestroyAPIView):
         return Enfant.objects.filter(commune=user.commune)
 
 class EnfantLista(generics.ListAPIView):
-    permission_classes=[IsAdminAuthenticated]
+    permission_classes=[AllowAny]
     model=Enfant
     serializer_class=EnfantS
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -104,7 +104,7 @@ class EnfantLista(generics.ListAPIView):
 
 #Les commodites
 class CommoditeListad(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes=[IsAdminAuthenticated]
+    permission_classes=[AllowAny]
     model=Commodite
     serializer_class=CommoditeS
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -114,7 +114,7 @@ class CommoditeListad(generics.RetrieveUpdateDestroyAPIView):
         return Commodite.objects.all()
 
 class CommoditeLista(generics.ListAPIView):
-    permission_classes=[IsAdminAuthenticated]
+    permission_classes=[AllowAny]
     model=Commodite
     serializer_class=CommoditeS
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -125,7 +125,7 @@ class CommoditeLista(generics.ListAPIView):
 
 #Les equipements
 class EquipementListad(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes=[IsAdminAuthenticated]
+    permission_classes=[AllowAny]
     model=Equipement
     serializer_class=EquipementS
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -136,7 +136,7 @@ class EquipementListad(generics.RetrieveUpdateDestroyAPIView):
 
 
 class EquipementLista(generics.ListAPIView):
-    permission_classes=[IsAdminAuthenticated]
+    permission_classes=[AllowAny]
     model=Equipement
     serializer_class=EquipementS
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -147,7 +147,7 @@ class EquipementLista(generics.ListAPIView):
 
 #Les deces
 class DecesLista(generics.ListAPIView):
-    permission_classes=[IsAdminAuthenticated]
+    permission_classes=[AllowAny]
     model=Deces
     serializer_class=PostChefMSerializer
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -157,7 +157,7 @@ class DecesLista(generics.ListAPIView):
         return Deces.objects.all()
 
 class DecesListad(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes=[IsAdminAuthenticated]
+    permission_classes=[AllowAny]
     model=Deces
     serializer_class=PostChefMSerializer
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -168,7 +168,7 @@ class DecesListad(generics.RetrieveUpdateDestroyAPIView):
 
 #les charges
 class ChargeLista(generics.ListAPIView):
-    permission_classes=[IsAdminAuthenticated]
+    permission_classes=[AllowAny]
     model=Charge
     serializer_class=PostChargeSerializer
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -178,7 +178,7 @@ class ChargeLista(generics.ListAPIView):
         return Charge.objects.filter(commune=user.commune)
 
 class ChargeListad(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes=[IsAdminAuthenticated]
+    permission_classes=[AllowAny]
     model=Charge
     serializer_class=PostChargeSerializer
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -187,7 +187,16 @@ class ChargeListad(generics.RetrieveUpdateDestroyAPIView):
         user = self.request.user
         return Charge.objects.filter(commune=user.commune)
 
-  
+class Affecter(APIView):
+    def post(self,request):
+        message='Merci pour votre contribution:\n nous vous contacterons dans peut'
+        data=request.data
+        serializer = AffectaSerializer(data=data)
+        message='Merci pour votre contribution:\n nous vous contacterons dans peu'
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'message':message,'data':serializer.data})            
+        return Response({'message':serializer.errors})
 
 
     # def get(self,request,pk):

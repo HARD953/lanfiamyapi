@@ -23,12 +23,12 @@ from posts.serializers import*
 
 class CreateAgent(generics.CreateAPIView):
     queryset=NewUser.objects.all()
-    permission_classes=[IsAdminAuthenticated]
+    permission_classes=[AllowAny]
     serializer_class=UserSerializer
 
 class CreateAdmin(generics.CreateAPIView):
     queryset=NewUser.objects.all()
-    permission_classes=[IsSuperAdminAuthenticated]
+    permission_classes=[AllowAny]
     serializer_class=AdminSerializer
 
 class CreateSuperAdmin(generics.CreateAPIView):
@@ -44,7 +44,7 @@ class CreateSuperAdmin(generics.CreateAPIView):
 
 
 class ListAgent(generics.ListAPIView):
-    permission_classes=[IsAdminAuthenticated]
+    permission_classes=[AllowAny]
     model=NewUser
     serializer_class=UserSerializer
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -54,7 +54,7 @@ class ListAgent(generics.ListAPIView):
         return NewUser.objects.filter(commune=user.commune,is_agent=True)
 
 class ListAllAgent(generics.ListAPIView):
-    permission_classes=[IsSuperAdminAuthenticated]
+    permission_classes=[AllowAny]
     model=NewUser
     serializer_class=UserSerializer
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -64,7 +64,7 @@ class ListAllAgent(generics.ListAPIView):
         return NewUser.objects.filter(is_agent=True)
 
 class ListAdmin(generics.ListAPIView):
-    permission_classes=[IsSuperAdminAuthenticated]
+    permission_classes=[AllowAny]
     model=NewUser
     serializer_class=AdminSerializer
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -74,7 +74,7 @@ class ListAdmin(generics.ListAPIView):
         return NewUser.objects.filter(is_user=True)
 
 class ListRecenser(generics.ListAPIView):
-    permission_classes=[IsAgentAuthenticated]
+    permission_classes=[AllowAny]
     model=Chef_menage
     serializer_class=PostChefMSerializer
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -84,7 +84,7 @@ class ListRecenser(generics.ListAPIView):
         return Chef_menage.objects.all()
 
 class DetailAgent(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes=[IsAgentAuthenticated]
+    permission_classes=[AllowAny]
     model=Chef_menage
     serializer_class=PostChefMSerializer
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -94,7 +94,7 @@ class DetailAgent(generics.RetrieveUpdateDestroyAPIView):
         return Chef_menage.objects.all()
 
 class DetailAdmin(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes=[IsSuperAdminAuthenticated]
+    permission_classes=[AllowAny]
     model=NewUser
     serializer_class=AdminSerializer
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -110,7 +110,7 @@ class DetailAdmin(generics.RetrieveUpdateDestroyAPIView):
 
 class DetailAdmin(generics.RetrieveUpdateDestroyAPIView):
     queryset=NewUser.objects.all()
-    permission_classes=[IsSuperAdminAuthenticated]
+    permission_classes=[AllowAny]
     serializer_class=AdminSerializer
 
 #How make to connect when we use token jwt
@@ -140,8 +140,6 @@ class MyTokenObtainPairView(TokenObtainPairView):
 #         user_data=UserSerializer(user,context=serializer_context).data
 #         return Response(user_data)
         
-
-
 
 
 
@@ -187,7 +185,7 @@ class LoginView(APIView):
 
 # class DetailSuperAdmin(generics.RetrieveUpdateDestroyAPIView):
 #     queryset=NewUser.objects.all()
-#     permission_classes=[IsSuperAdminAuthenticated]
+#     permission_classes=[AllowAny]
 #     serializer_class=SuperAdminSerializer
 
 #Select All information for user who as connected

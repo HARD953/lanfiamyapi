@@ -8,3 +8,4 @@ class UserAdminConfig(UserAdmin):
     list_display=('user_name','first_name','email','is_staff','is_active')
 
 admin.site.register(NewUser,UserAdminConfig)
+admin.site.register(Affectation)
